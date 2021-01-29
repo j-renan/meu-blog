@@ -1,0 +1,51 @@
+body.referencia {
+    grid-template-rows: 100px 1fr 50px;
+    grid-template-areas: 
+        "cabecalho"
+        "principal"
+        "rodape";
+}
+
+.principal {
+    height: calc(100vh - 150px);
+}
+
+.navegacao > a {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 300;
+    font-size: 1.3rem;
+    background-color: #2196f3;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.navegacao > a.verde { background-color: #4CAF50; }
+.navegacao > a.vermelho { background-color: #F44336; }
+
+.conteudo {
+    font-size: 2rem;
+}
+
+.conteudo > .titulo {
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 20px;
+}
+
+.conteudo > .subtitulo {
+    font-size: 1.5rem;
+    font-weight: 300;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 0px;
+}
+
+.conteudo > .subtitulo > p {
+    font-size: 1rem;
+    background-color: black;
+    color: #fff;
+    margin: 0px;
+}
