@@ -49,3 +49,8 @@ body.referencia {
     color: #fff;
     margin: 0px;
 }
+
+.conteudo > .subtitulo > p > span{
+    color: darkgoldenrod;
+    font-size: 1rem;
+}

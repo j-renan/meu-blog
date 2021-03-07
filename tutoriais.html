@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="recursos/css/estilo.css">
+    <link rel="stylesheet" href="recursos/css/referencia.css">
+    <title>MySql/PhpMyAdmin</title>
+</head>
+<body class="referencia">
+    <header class="cabecalho">
+        <h1>Como instalar MySql e PhpMyAdmin no Linux</h1>
+       
+            <nav class="navegacao">            
+                <a href="index.html" class="vermelho">Voltar</a>
+            </nav>
+             
+    </header>
+    
+    <main class="principal">
+        <div class="conteudo">
+            <h2>MySQL</h2>
+            <div class="subtitulo">Instalação
+                <p>:~$ apt-get update</p>
+                <p>:~$ apt-get install mysql-server mysql-client</p>
+            </div>
+            
+            <div class="subtitulo">Acesse a linha de comando de serviço MySQL.
+                <p class="texto">:~$ mysql <span>-u</span> root <span>-p</span></p>
+            </div>
+            
+            <div class="subtitulo">Defina uma senha para o usuário root do MySQL.
+                <p class="texto">ALTER USER <span>'root'</span>@<span>'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span>'sua senha'</span>;</p>
+                <p class="texto">FLUSH PRIVILEGES;</p>
+                <p class="texto"><span>exit</span></p>
+            </div>
+
+            <div class="subtitulo">Tente acessar o serviço MySQL usando a nova senha.
+                <p class="texto">:~$ mysql <span>-u</span> root <span>-p</span></p>
+            </div>
+
+            <div class="subtitulo">Crie um banco de dados chamado phpmyadmin.
+                <p class="texto">CREATE DATABASE phpmyadmin CHARACTER SET UTF8 COLLATE UTF8_BIN;</p>
+            </div>
+
+            <div class="subtitulo">Crie uma conta de usuário Mysql chamada PMA
+                <p class="texto">CREATE USER <span>'pma'</span>@<span>'%'</span> IDENTIFIED BY <span>'sua senha'</span>;</p>
+            </div>
+
+            <div class="subtitulo">Conceda a permissão da conta de usuário PMA sobre o banco de dados chamado PHPMYADMIN.
+                <p class="texto">GRANT ALL PRIVILEGES ON phpmyadmin .* TO <span>'pma'</span>@<span>'%'</span>;</p>
+                <p class="texto"><span>exit</span></p>
+            </div>
+
+            <br>
+            <h2>PhpMyAdmin</h2>
+
+            <div class="subtitulo">Baixe o pacote de instalação PhpMyAdmin
+                <p class="texto">:~$ mkdir /downloads</p>
+                <p class="texto">:~$ cd /downloads</p>
+                <p class="texto">:~$ wget https://files.phpmyadmin.net/phpMyAdmin/4.9.5/phpMyAdmin-4.9.5-all-languages.tar.gz
+                    tar <span>-zxvf</span> phpMyAdmin-4.9.5-all-languages.tar.gz</p>
+            </div>
+
+            <div class="subtitulo">Importe o modelo de banco de dados do PhpMyAdmin usando a conta chamada PMA.
+                <p class="texto">:~$ cd /downloads/phpMyAdmin-4.9.5-all-languages/sql</p>
+                <p class="texto">:~$ mysql <span>-u</span> pma <span>-p</span> phpmyadmin < create_tables.sql</p>
+            </div>
+
+            <div class="subtitulo">Crie a lista de diretórios necessários.
+                <p class="texto">:~$ ssh mkdir /etc/phpmyadmin/upload <span>-p</span></p>
+                <p class="texto">:~$ mkdir /etc/phpmyadmin/save</p>
+                <p class="texto">:~$ mkdir /etc/phpmyadmin/tmp</p>
+                <p class="texto">:~$ mkdir /var/www/html/phpmyadmin/tmp</p>
+            </div>
+
+            <div class="subtitulo">Defina as permissões corretas.
+                <p class="texto">:~$ chown www-data.www-data /var/www/html/phpmyadmin <span>-R</span> <br>
+                    :~$ chown www-data.www-data /etc/phpmyadmin <span>-R</span> <br>
+                    :~$ chmod 660  /etc/phpmyadmin <span>-R</span> <br>
+                    :~$ chmod 777 /var/www/html/phpmyadmin/tmp <span>-R</span></p>
+            </div>
+
+            <div class="subtitulo">Crie o arquivo de configuração do PhpMyAdmin.
+                <p class="texto">:~$ cp /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php</p>
+            </div>
+
+            <div class="subtitulo">Edite o arquivo de configuração.
+                <p class="texto">:~$ vi /var/www/html/phpmyadmin/config.inc.php</p>
+            </div>
+
+            <div class="subtitulo">Habilite e configure os seguintes itens do arquivo de configuração.
+                <p class="texto"><span>$cfg</span>['blowfish_secret'] = 'pZKqeMBY4em5xyzWANC+4fM7FMKa0Tblv6NPxdo0eSs=';<br>
+                    <span>$cfg</span>['Servers'][<span>$i</span>]['controlhost'] = 'localhost';<br>
+                    <span>$cfg</span>['Servers'][<span>$i</span>]['controlport'] = '3306';<br>
+                    <span>$cfg</span>['Servers'][<span>$i</span>]['controluser'] = 'pma';<br>
+                    <span>$cfg</span>['Servers'][<span>$i</span>]['controlpass'] = 'sua senha';<br>
+                    <span>$cfg</span>['UploadDir'] = '/etc/phpmyadmin/upload';<br>
+                    <span>$cfg</span>['SaveDir'] = '/etc/phpmyadmin/save';</p>
+            </div>
+
+            <div class="subtitulo">Use o seguinte comando para gerar a chave aleatória usada no parâmetro chamado: BLOWFISH_SECRET
+                <p class="texto">:~$ openssl rand <span>-base64 32</span></p>
+            </div>
+        </div>
+    </main>
+    <footer class="rodape">
+        JOÃO RENAN CELSO © 
+    </footer>
+</body>
+</html>
+
+
